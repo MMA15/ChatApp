@@ -15,8 +15,10 @@ main{
 ol{
 	padding: 5px;
 	list-style: none;
-  overflow-y: scroll;
-  max-height: 80%;
+  overflow-y: auto;
+  max-height: 50%;
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
 li{
