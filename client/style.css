@@ -1,0 +1,63 @@
+body{
+	background-color: white;
+	color: #303030;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	margin: 20px;
+}
+
+main{
+	background-color: #f0f0f0;
+	margin: 20px auto;
+	max-width: 450px;
+	padding: 20px;
+}
+
+ol{
+	padding: 5px;
+	list-style: none;
+  overflow-y: scroll;
+  max-height: 80%;
+}
+
+li{
+	padding: 5px;
+	background: green;
+}
+
+li:nth-child(odd) { 
+	background: red; 
+}
+
+form {
+  background-color: lightsteelblue;
+  border-radius: 6px;
+  margin: 0;
+  padding: 5px;
+}
+
+button {
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 3px;
+  color: Black;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+input{
+  background-color: #FF8000;
+  color: white;
+  padding: 10px 0px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+}
+#initials {
+  width: 40px;
+}
+
+#message {
+  width: 315px;
+}
