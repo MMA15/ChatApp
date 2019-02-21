@@ -1,18 +1,18 @@
-body{
+body {
 	background-color: white;
 	color: #303030;
 	font-family: 'Helvetica Neue', Arial, sans-serif;
 	margin: 20px;
 }
 
-main{
+main {
 	background-color: #f0f0f0;
 	margin: 20px auto;
 	max-width: 450px;
 	padding: 20px;
 }
 
-ol{
+ol {
 	padding: 5px;
 	list-style: none;
   overflow-y: auto;
@@ -21,7 +21,7 @@ ol{
   word-wrap: break-word;
 }
 
-li{
+li {
 	padding: 5px;
 	background: green;
 }
@@ -48,7 +48,7 @@ button {
   text-transform: uppercase;
 }
 
-input{
+input {
   background-color: #FF8000;
   color: white;
   padding: 10px 0px;
@@ -62,4 +62,18 @@ input{
 
 #message {
   width: 315px;
+}
+.signup {
+  max-width: 450;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding: 10px;
+}
+.login {
+  max-width: 450;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding: 20px;
 }

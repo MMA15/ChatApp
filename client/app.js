@@ -1,6 +1,15 @@
 var socket = io(); /*This is saying that socket is now a reference to the Socket.IO library.*/
+$('.login').hide();
+$('.userform').hide();
 $('#history').hide();
 $('.messagearea').hide();
+
+$('.account').click(function (e) {
+	e.preventDefault();
+	$('.account').fadeOut();
+	$('.signup').fadeOut();
+	$('.login').show();
+});
 
 $('.userform').submit(function(e) {
 	e.preventDefault();
