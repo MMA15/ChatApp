@@ -8,8 +8,6 @@ var io = require('socket.io')(server);
 const bcrypt = require('bcrypt');
 const emailRegex = require('email-regex');
 
-var user_log = [];
-
 app.use('/', express.static('client'));
 
 
@@ -27,39 +25,42 @@ const pool = new Pool({
 io.on('connection', function(socket){
 	
 	socket.on('Signup', function(email, password, callback){
-		bcrypt.hash(password, 10, function(error, hash){
-			if (error){
-				throw error;
-			}
-			else{
-				pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [email, hash], (error, results) =>{ 
-					if (error){
-						callback(false);
-					}
-					else{
-						socket.email = email;
-						callback(true);
-					}
-				});
-			}
-		});
-	});
-
-	socket.on('create user', function(username, callback){
-		if (user_log.includes(username)){
-			callback(false);			
-		} else{
-			pool.query('UPDATE users SET username = $1 WHERE email = $2', [username, socket.email], (error, results) =>{
+		//check if email is valid then hash password
+		if (emailRegex({exact: true}).test(email)){
+			bcrypt.hash(password, 10, function(error, hash){
 				if (error){
 					throw error;
 				}
 				else{
-					callback(true);
-					user_log.push(username);
-					socket.user = username;
+					pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [email, hash], (error, results) =>{ 
+						if (error){
+							callback(false);
+							io.emit("signup error", "E-mail already has an account.");
+						}
+						else{
+							socket.email = email;
+							callback(true);
+						}
+					});
 				}
 			});
 		}
+		else{
+			callback(false);
+			io.emit("signup error", "E-mail format is invalid.");
+		}
+	});
+
+	socket.on('create user', function(username, callback){
+		pool.query('UPDATE users SET username = $1 WHERE email = $2', [username, socket.email], (error, results) =>{
+			if (error){
+				throw error;
+			}
+			else{
+				callback(true);
+				socket.user = username;
+			}
+		});
 	});
 
 	socket.on('login user', function(email, password, callback){
@@ -84,7 +85,8 @@ io.on('connection', function(socket){
 					}
 					else{
 						if (res){
-							callback(true);	
+							callback(true);
+							socket.user = results.rows[0].username;
 							io.emit('accept', results.rows[0].username);
 							socket.email = results.rows[0].email;
 						}
@@ -97,18 +99,13 @@ io.on('connection', function(socket){
 			}
 		});
 	});
-});
-
-io.on('connection', function(socket){
+	
 	socket.on('message', function(msg){
 		io.emit('message', msg);
 	});
-});
 
-io.on('connection', function(socket){
 	socket.on('disconnect', function(){
-		user_log.splice(user_log.indexOf(socket.user), 1); //gets rid of one user
-		io.emit('user left', user_log.length);
+		io.emit('user left', socket.user);
 	});
 });
 

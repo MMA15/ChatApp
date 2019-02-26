@@ -3,6 +3,7 @@ $('.login').hide();
 $('.userform').hide();
 $('#history').hide();
 $('.messagearea').hide();
+$('.back').hide();
 
 $('.signup').submit(function(e){
 	e.preventDefault();
@@ -15,16 +16,19 @@ $('.signup').submit(function(e){
 			$('.userform').show();
 		}
 		else{
-			$('#signup_error').html("E-mail already has an account.");
+			socket.on('signup error', function(signup_error_msg){
+				$('#signup_error').html(signup_error_msg + "Please confirm.");
+			});
 		}
 	});
 });
 
-$('.account').click(function (e) {
+$('.account').click(function(e) {
 	e.preventDefault();
 	$('.account').fadeOut();
 	$('.signup').fadeOut();
 	$('.login').show();
+	$('.back').show();
 });
 
 $('.login').submit(function(e){
@@ -80,8 +84,8 @@ socket.on('message', function(msg){
 
 });
 
-socket.on('user left', function(number_of_ppl){
-	$('<li>').text("Someone left. There is " + number_of_ppl + " user(s) in the chat.").appendTo('#history');
+socket.on('user left', function(user_left){
+	$('<li>').text(user_left + " left the chat.").appendTo('#history');
 	$('#history').animate({scrollTop: $('#history').prop("scrollHeight")}, 500);
 
 });
