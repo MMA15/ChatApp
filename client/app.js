@@ -4,6 +4,22 @@ $('.userform').hide();
 $('#history').hide();
 $('.messagearea').hide();
 
+$('.signup').submit(function(e){
+	e.preventDefault();
+	var email = $('#email').val();
+	var password = $('#password').val();
+	socket.emit('Signup', email, password, function(valid){
+		if (valid){
+			$('.signup').fadeOut();
+			$('.account').fadeOut();
+			$('.userform').show();
+		}
+		else{
+			$('#signup_error').html("E-mail already has an account.");
+		}
+	});
+});
+
 $('.account').click(function (e) {
 	e.preventDefault();
 	$('.account').fadeOut();
@@ -11,11 +27,34 @@ $('.account').click(function (e) {
 	$('.login').show();
 });
 
+$('.login').submit(function(e){
+	e.preventDefault();
+	var email = $('#exist_email').val();
+	var password = $('#real_password').val();
+	socket.emit('login user', email, password, function(valid){
+		if (valid){
+			//if login is valid go to messagearea
+			socket.on('accept', function(results){
+				socket.user = results;
+				$('.login').fadeOut();
+				$('#history').show();
+				$('.messagearea').show();
+			});
+
+		}
+		else{
+			socket.on('error', function(error_msg){
+				$('#error').html(error_msg + "Please confirm or proceed to sign up page.");
+			});
+		}
+	});
+});
+
 $('.userform').submit(function(e) {
 	e.preventDefault();
 	var username = $('#user').val();
-	socket.emit('login', username, function(usernames) {
-		if (usernames){
+	socket.emit('create user', username, function(valid) {
+		if (valid){
 			$('.userform').fadeOut();
 			$('#history').show();
 			$('.messagearea').show();

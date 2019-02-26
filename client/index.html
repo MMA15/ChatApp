@@ -6,10 +6,10 @@
 		<form class="signup">
 			<label for = "email">Enter email address to sign up: </label>
 			<input type = "text" id = "email" required>
-			<label for = "password">Enter password: </label>
-			<input type = "password" id = "password" required>
+			<label for = "password">Enter password (mininum length 8): </label>
+			<input type = "password" id = "password" minlength="8" required>
 			<button type = "submit"> Submit </button>
-			<p></p>
+			<p id = "signup_error"></p>
 		</form>
 		
 		<button  class="account" type = "button"> Already have an account </button>
@@ -22,12 +22,12 @@
 		</form>
 
 		<form class="login">
-			<label for = "email">Enter existing email address: </label>
-			<input type = "text" id = "email" required>
-			<label for = "password">Enter password: </label>
-			<input type = "password" id = "password" required>
+			<label for = "exist_email">Enter existing email address: </label>
+			<input type = "text" id = "exist_email" required>
+			<label for = "real_password">Enter password: </label>
+			<input type = "password" id = "real_password" required>
 			<button type = "submit"> Submit </button>
-			<p></p>
+			<p id = "error" ></p>
 		</form>
 		
 		<ol id="history">
