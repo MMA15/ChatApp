@@ -41,6 +41,7 @@ $('.login').submit(function(e){
 			socket.on('accept', function(results){
 				socket.user = results;
 				$('.login').fadeOut();
+				$('.back').fadeOut();
 				$('#history').show();
 				$('.messagearea').show();
 			});
@@ -60,6 +61,7 @@ $('.userform').submit(function(e) {
 	socket.emit('create user', username, function(valid) {
 		if (valid){
 			$('.userform').fadeOut();
+			$('.back').fadeOut();
 			$('#history').show();
 			$('.messagearea').show();
 			socket.user = username;
@@ -87,5 +89,14 @@ socket.on('message', function(msg){
 socket.on('user left', function(user_left){
 	$('<li>').text(user_left + " left the chat.").appendTo('#history');
 	$('#history').animate({scrollTop: $('#history').prop("scrollHeight")}, 500);
+
+});
+
+$('.back').click(function(e){
+	e.preventDefault();
+	$('.login').fadeOut();
+	$('.back').fadeOut();
+	$('.account').show();
+	$('.signup').show();
 
 });
