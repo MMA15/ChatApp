@@ -23,7 +23,6 @@ const pool = new Pool({
 
 
 io.on('connection', function(socket){
-	
 	socket.on('Signup', function(email, password, callback){
 		//check if email is valid then hash password
 		if (emailRegex({exact: true}).test(email)){

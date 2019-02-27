@@ -45,6 +45,7 @@ $('.login').submit(function(e){
 				$('.back').fadeOut();
 				$('#history').show();
 				$('.messagearea').show();
+				$('.logout').show();
 			});
 
 		}
@@ -89,9 +90,10 @@ socket.on('message', function(msg){
 });
 
 socket.on('user left', function(user_left){
-	$('<li>').text(user_left + " left the chat.").appendTo('#history');
-	$('#history').animate({scrollTop: $('#history').prop("scrollHeight")}, 500);
-
+	if(user_left != null){
+		$('<li>').text(user_left + " left the chat.").appendTo('#history');
+		$('#history').animate({scrollTop: $('#history').prop("scrollHeight")}, 500);
+	}
 });
 
 $('.back').click(function(e){
@@ -105,5 +107,6 @@ $('.back').click(function(e){
 
 $('.logout').click(function(e){
 	e.preventDefault();
-	
+	socket.disconnect(); //atm submit wont work after socket leaves
+	window.location.reload();
 });

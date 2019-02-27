@@ -77,3 +77,10 @@ input {
   text-align: left;
   padding: 20px;
 }
+.logout {
+  max-width: 450;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  padding: 20px;
+}
