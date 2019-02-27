@@ -13,14 +13,17 @@ app.use('/', express.static('client'));
 
 const Pool = require('pg').Pool;
 const pool = new Pool({
-	user: process.env.PGUSER,
+	connectionString: process.env.DATABASE_URL,
+	ssl: true,
+	/*user: process.env.PGUSER,
 	host: process.env.PGHOST,
 	database: process.env.PGDATABASE,
 	password: process.env.PGPASSWORD,
 	port: process.env.PGPORT
-	//ssl: true
+	ssl: true*/
 });
 
+pool.connect();
 
 io.on('connection', function(socket){
 	socket.on('Signup', function(email, password, callback){
