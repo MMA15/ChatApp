@@ -34,7 +34,7 @@ io.on('connection', function(socket){
 					pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [email, hash], (error, results) =>{ 
 						if (error){
 							callback(false);
-							io.emit("signup error", "E-mail already has an account.");
+							//io.emit("signup error", "E-mail already has an account.");
 						}
 						else{
 							socket.email = email;
