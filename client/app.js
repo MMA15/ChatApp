@@ -4,6 +4,7 @@ $('.userform').hide();
 $('#history').hide();
 $('.messagearea').hide();
 $('.back').hide();
+$('.logout').hide();
 
 $('.signup').submit(function(e){
 	e.preventDefault();
@@ -64,6 +65,7 @@ $('.userform').submit(function(e) {
 			$('.back').fadeOut();
 			$('#history').show();
 			$('.messagearea').show();
+			$('.logout').show();
 			socket.user = username;
 		}else{
 			$('p').html("User already exists. Try again."); //not showing up now, double (olduser msg plus newuser msg on old user screen) thing still happening
@@ -99,4 +101,9 @@ $('.back').click(function(e){
 	$('.account').show();
 	$('.signup').show();
 
+});
+
+$('.logout').click(function(e){
+	e.preventDefault();
+	
 });
