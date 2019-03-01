@@ -61,7 +61,7 @@ input {
 }
 
 #message {
-  width: 315px;
+  max-width: 315px;
 }
 .signup {
   max-width: 450;
