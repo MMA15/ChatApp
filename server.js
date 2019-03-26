@@ -23,7 +23,7 @@ const pool = new Pool({
 	ssl: true*/
 });
 
-pool.connect();
+pool.connect(); //connect to postgres server
 
 io.on('connection', function(socket){
 	socket.on('Signup', function(email, password, callback){
