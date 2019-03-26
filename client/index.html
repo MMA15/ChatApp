@@ -45,12 +45,13 @@
 
 		<button class="logout" type = "button"> Log Out </button>
 	</main>
+
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script><!--adding/loading jquery library using a Content Delivery Network (CDN) since its not a part of JS. A CDN (Content Delivery Network) has a free-to-use file that you can link to in order to load jQuery on your webpage.-->
+
+	<script src="/socket.io/socket.io.js"></script><!--adding/loading socket a third party Node module to communicate between server and client-->
+
+	<script src="app.js"></script> <!--call your javascript file-->
+	<!--Putting scripts at the bottom of the html file allows the html portion to load up faster and prevents the site from freezing/hanging up if there is something wrong with the JS portion.-->
+
+	<!--The data transferred between the browser and server is often in a format called JavaScript Object Notation (JSON). JSON resembles JavaScript object literal syntax, except that it's transferred as a string. Once received, it can be converted into an object and used in a script.-->
 </body>
-<script src="https://code.jquery.com/jquery-3.1.1.js"></script><!--adding/loading jquery library using a Content Delivery Network (CDN) since its not a part of JS. A CDN (Content Delivery Network) has a free-to-use file that you can link to in order to load jQuery on your webpage.-->
-
-<script src="/socket.io/socket.io.js"></script><!--adding/loading socket a third party Node module to communicate between server and client-->
-
-<script src="app.js"></script> <!--call your javascript file-->
-<!--Putting scripts at the bottom of the html file allows the html portion to load up faster and prevents the site from freezing/hanging up if there is something wrong with the JS portion.-->
-
-<!--The data transferred between the browser and server is often in a format called JavaScript Object Notation (JSON). JSON resembles JavaScript object literal syntax, except that it's transferred as a string. Once received, it can be converted into an object and used in a script.-->
