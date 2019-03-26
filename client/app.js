@@ -1,22 +1,22 @@
 //document ready
 $(function(){
 	var socket = io(); /*This is saying that socket is now a reference to the Socket.IO library.*/
-	$('.login').hide();
-	$('.userform').hide();
+	$('#login').hide();
+	$('#userform').hide();
 	$('#history').hide();
-	$('.messagearea').hide();
-	$('.back').hide();
-	$('.logout').hide();
+	$('#messagearea').hide();
+	$('#back').hide();
+	$('#logout').hide();
 
-	$('.signup').submit(function(e){
+	$('#signup').submit(function(e){
 		e.preventDefault();
 		var email = $('#email').val();
 		var password = $('#password').val();
 		socket.emit('Signup', email, password, function(valid){
 			if (valid){
-				$('.signup').fadeOut();
-				$('.account').fadeOut();
-				$('.userform').show();
+				$('#signup').fadeOut();
+				$('#account').fadeOut();
+				$('#userform').show();
 			}
 			else{
 				socket.on('signup error', function(signup_error_msg){
@@ -26,15 +26,15 @@ $(function(){
 		});
 	});
 
-	$('.account').click(function(e) {
+	$('#account').click(function(e) {
 		e.preventDefault();
-		$('.account').fadeOut();
-		$('.signup').fadeOut();
-		$('.login').show();
-		$('.back').show();
+		$('#account').fadeOut();
+		$('#signup').fadeOut();
+		$('#login').show();
+		$('#back').show();
 	});
 
-	$('.login').submit(function(e){
+	$('#login').submit(function(e){
 		e.preventDefault();
 		var email = $('#exist_email').val();
 		var password = $('#real_password').val();
@@ -43,11 +43,11 @@ $(function(){
 				//if login is valid go to messagearea
 				socket.on('accept', function(results){
 					socket.user = results;
-					$('.login').fadeOut();
-					$('.back').fadeOut();
+					$('#login').fadeOut();
+					$('#back').fadeOut();
 					$('#history').show();
-					$('.messagearea').show();
-					$('.logout').show();
+					$('#messagearea').show();
+					$('#logout').show();
 				});
 
 			}
@@ -59,16 +59,16 @@ $(function(){
 		});
 	});
 
-	$('.userform').submit(function(e) {
+	$('#userform').submit(function(e) {
 		e.preventDefault();
 		var username = $('#user').val();
 		socket.emit('create user', username, function(valid) {
 			if (valid){
-				$('.userform').fadeOut();
-				$('.back').fadeOut();
+				$('#userform').fadeOut();
+				$('#back').fadeOut();
 				$('#history').show();
-				$('.messagearea').show();
-				$('.logout').show();
+				$('#messagearea').show();
+				$('#logout').show();
 				socket.user = username;
 			}else{
 				$('p').html("User already exists. Try again."); //not showing up now, double (olduser msg plus newuser msg on old user screen) thing still happening
@@ -77,7 +77,7 @@ $(function(){
 		return false;
 	});
 
-	$('.messagearea').submit(function(e){
+	$('#messagearea').submit(function(e){
 		e.preventDefault();
 		var text = $('#message').val();
 		socket.emit('message', socket.user + ' says: '+ text);/*The code above says to emit the textual message to the server instead of performing our temporary alert behaviour.*/
@@ -98,16 +98,16 @@ $(function(){
 		}
 	});
 
-	$('.back').click(function(e){
+	$('#back').click(function(e){
 		e.preventDefault();
-		$('.login').fadeOut();
-		$('.back').fadeOut();
-		$('.account').show();
-		$('.signup').show();
+		$('#login').fadeOut();
+		$('#back').fadeOut();
+		$('#account').show();
+		$('#signup').show();
 
 	});
 
-	$('.logout').click(function(e){
+	$('#logout').click(function(e){
 		e.preventDefault();
 		socket.disconnect(); //atm submit wont work after socket leaves
 		window.location.reload();
